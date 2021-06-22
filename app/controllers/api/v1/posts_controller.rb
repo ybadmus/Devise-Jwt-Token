@@ -37,7 +37,7 @@ class API::V1::PostsController < ApplicationController
     def set_post
       @post = Post.find(params[:id])
     rescue
-      render json: {errors: ["Post could not found"]}, status: 404 
+      render json: {errors: ["Post could not be found"]}, status: 404 
     end
 
     def post_params
