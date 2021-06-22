@@ -1,9 +1,8 @@
-class Api::V1::AuthenticationController < ApiController
-  skip_before_action :authenticate_token!
+class API::V1::AuthenticationController < ApplicationController
 
-  def create
-    user = User.find_by(email: params[:user][:email])
-    if user.valid_password? user.password
+  def login
+    user = User.find_by(email: params[:authentication][:email])
+    if user.valid_password? params[:authentication][:password_digest]
       render json: { token: JsonWebToken.encode(sub: user.id) }
     else
       render json: { errors: ["Invalid email or password"] }
