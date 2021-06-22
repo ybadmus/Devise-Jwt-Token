@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   attr_reader :current_user
+  
   skip_before_action :verify_authenticity_token
 
   before_action :set_default_format
