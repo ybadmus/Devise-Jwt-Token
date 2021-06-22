@@ -1,5 +1,6 @@
 class API::V1::PostsController < ApplicationController 
-  before_action :set_action, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[show update destroy]
+  before_action :authenticate_token!
 
   def index
     render json: Post.all
@@ -18,10 +19,25 @@ class API::V1::PostsController < ApplicationController
     end
   end
 
+  def update
+    if @post.update(post_params)
+      render json: @post, status: 200
+    else
+      render json: { errors: @post.errors }, status: 422
+    end
+  end
+
+  def destroy
+    @post.destroy
+    head 204
+  end
+
   private 
     
     def set_post
       @post = Post.find(params[:id])
+    rescue
+      render json: {errors: ["Post could not found"]}, status: 404 
     end
 
     def post_params

@@ -2,7 +2,6 @@ class ApplicationController < ActionController::API
   attr_reader :current_user
   
   before_action :set_default_format
-  before_action :authenticate_token!
 
   private
 
@@ -23,9 +22,5 @@ class ApplicationController < ActionController::API
 
     def auth_token
       @auth_token ||= request.headers.fetch("Authorization", "").split(" ").last
-    end
-
-    def current_user
-      @current_user
     end
 end
