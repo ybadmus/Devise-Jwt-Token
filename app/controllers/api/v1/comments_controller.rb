@@ -1,6 +1,6 @@
 class API::V1::CommentsController < ApplicationController 
   before_action :set_post, only: %i[index create]
-  before_action :set_comment, only: %i[show]
+  before_action :set_comment, only: %i[show update destroy]
   before_action :authenticate_token!
 
   def index
@@ -20,6 +20,19 @@ class API::V1::CommentsController < ApplicationController
     else
       render json: { errors: comment.errors }, status: 422
     end
+  end
+
+  def update
+    if @comment.update(comment_params)
+      render json: @comment, status: 200
+    else
+      render json: { errors: @comment.errors }, status: 422
+    end
+  end
+
+  def destroy
+    @comment.destroy
+    head 200
   end
 
   private

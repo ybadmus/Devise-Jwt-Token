@@ -12,7 +12,7 @@ class API::V1::PostsController < ApplicationController
 
   def create 
     post = current_user.posts.build(post_params)
-    
+
     if post.save
       render json: post, status: 201
     else
@@ -30,7 +30,7 @@ class API::V1::PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    head 204
+    head 200
   end
 
   private 
