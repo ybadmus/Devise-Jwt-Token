@@ -4,7 +4,17 @@ class SessionsController < Devise::SessionsController
   private
 
   def respond_with(resource, _opts = {})
+    login_success && return if resource.persisted?
+
+    login_failed
+  end
+
+  def login_success
     render json: { message: 'You are logged in.' }, status: :ok
+  end
+
+  def login_failed
+    render json: { message: 'Invalid username or password' }
   end
 
   def respond_to_on_destroy
