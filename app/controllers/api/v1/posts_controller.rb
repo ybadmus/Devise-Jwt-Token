@@ -1,6 +1,6 @@
 class API::V1::PostsController < ApplicationController 
   before_action :set_post, only: %i[show update destroy]
-  before_action :authenticate_token!
+  before_action :authenticate_user!
 
   def index
     render json: Post.all

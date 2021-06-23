@@ -1,7 +1,7 @@
 class API::V1::CommentsController < ApplicationController 
   before_action :set_post, only: %i[index create]
   before_action :set_comment, only: %i[show update destroy]
-  before_action :authenticate_token!
+  before_action :authenticate_user!
 
   def index
     render json: @post.comments
