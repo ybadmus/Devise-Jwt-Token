@@ -2,10 +2,10 @@
 
 The project is a simple API for creating posts and submitting comments to them. It implements a token based authentication system with devise-jwt running on devise gem. 
 
-![screenshot](https://raw.githubusercontent.com/ybadmus/new_wave/main/app_screenshot (1).png)
-![screenshot](https://raw.githubusercontent.com/ybadmus/new_wave/main/app_screenshot (2).png)
-![screenshot](https://raw.githubusercontent.com/ybadmus/new_wave/main/app_screenshot (3).png)
-![screenshot](https://raw.githubusercontent.com/ybadmus/new_wave/main/app_screenshot (4).png)
+![screenshot](https://raw.githubusercontent.com/ybadmus/new_wave/main/app_screenshot(1).png)
+![screenshot](https://raw.githubusercontent.com/ybadmus/new_wave/main/app_screenshot(2).png)
+![screenshot](https://raw.githubusercontent.com/ybadmus/new_wave/main/app_screenshot(3).png)
+![screenshot](https://raw.githubusercontent.com/ybadmus/new_wave/main/app_screenshot(4).png)
 
 ## Built With
 
