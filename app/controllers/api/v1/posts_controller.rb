@@ -3,7 +3,7 @@ class API::V1::PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    render json: Post.all
+    render json: Post.all, each_serializer: PostWithoutCommentsSerializer
   end
 
   def show
