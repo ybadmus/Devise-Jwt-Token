@@ -1,17 +1,19 @@
 class API::V1::CommentsController < ApplicationController 
-  before_action :set_post, only: %i[index create]
   before_action :set_comment, only: %i[show update destroy]
   before_action :authenticate_user!
 
   def index
+    @post = set_post
     render json: @post.comments
   end
 
   def show
-    render json: @comment, include: ['user', 'post']
+    @comment = set_comment
+    render json: @comment
   end
 
   def create 
+    @post = set_post
     comment = @post.comments.new(comment_params)
     comment.user_id = current_user.id
 
@@ -23,6 +25,7 @@ class API::V1::CommentsController < ApplicationController
   end
 
   def update
+    @comment = set_comment
     if @comment.update(comment_params)
       render json: @comment, status: 200
     else
@@ -31,6 +34,7 @@ class API::V1::CommentsController < ApplicationController
   end
 
   def destroy
+    @comment = set_comment
     @comment.destroy
     head 200
   end
@@ -38,13 +42,13 @@ class API::V1::CommentsController < ApplicationController
   private
 
     def set_post
-      @post = Post.includes(:comments).find(params[:post_id])
+      Post.includes(comments: [:user]).find(params[:post_id])
     rescue
       render json: {errors: ["Post could not be found"]}, status: 404 
     end
 
     def set_comment
-      @comment = Comment.find(params[:id])
+      Comment.find(params[:id])
     rescue
       render json: {errors: ["Comment could not be found"]}, status: 404 
     end
